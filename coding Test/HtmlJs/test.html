@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Billing Details</title>
+   
+    <style>
+        body{
+            font-size: 16px;
+            background-color:rgb(197, 197, 186);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        h1{
+          text-align: center;
+          text-decoration: underline;  
+        }
+
+        form{
+            width : 350px;
+            padding : 15px;
+            border : 2px solid rgb(7, 7, 2);
+            margin: 50px auto 0;
+            border-radius: 5px;  
+        }
+
+        label{
+            display:block;
+            margin-bottom: 5px;
+        }
+
+        input, select{
+            border:1px solid lightgrey;
+            padding:10px;
+            display:block;
+            width:95%;
+            border-radius: 2px;
+        }
+        input.inline{
+            display:inline-block;
+            width: auto;
+            padding-right: 15px;
+        }
+        .row{
+            padding-bottom: 15px;
+        }
+        .err{
+            font-size:0.8em;
+            color :indianred;
+        }
+        button{
+            display:block;
+            width:95%;
+            height: 50px;
+            border-color:rebeccapurple;
+            background-color:rgb(204, 149, 133);
+            margin-top: 15px;
+           
+        }
+    </style>
+    <script>
+        const $get = function(id){
+    return document.getElementById(id);
+}
+        function showErr(ele, msg){
+            $get(ele).innerText = msg;
+        }
+        function Validate(){
+  
+            let name = document.regForm.name.value;
+            let email = document.regForm.email.value;
+            let mobile = document.regForm.phone.value;
+            let billingdate=document.regForm.billingdate.value;
+            let billingamount=document.regForm.billingamount.value;
+
+            if(name == "" || name == null){
+                showErr("errName", "Name is mandatory")
+                return false;
+            }else{
+                showErr("errName", "")
+            }
+  
+            if(email == ""){
+                showErr("errEmail", "Email is mandatory")
+                return false;
+            }else{
+                showErr("errEmail", "")
+            }
+            let regEx = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+            if(regEx.test(email) == false){
+                showErr("errEmail", "Email is not in a valid format")
+                return false;
+            } else {
+                showErr("errEmail", "")
+            }
+
+            let regEx1= new RegExp("/^[1-9]\d{10}$/");
+            if(mobile == ""){
+            showErr("errphone", "mobile number is mandatory")
+                return false;
+            }else {
+                showErr("errphone", "")
+            }
+            
+            if(billingdate == ""){
+            showErr("errbillingdate", "please enter billing date")
+                return false;
+            }else {
+                showErr("errbillingdate", "")
+            }
+            if(billingamount == ""){
+            showErr("errbillingamount", "please enter billing amount")
+                return false;
+            }else {
+                showErr("errbillingamount", "")
+            }
+            
+           
+        }
+    </script>
+</head>
+<body>
+    <form action="" name="regForm" novalidate="true" onsubmit="return Validate()">
+        <h1>Customer Billing Details</h1>
+        <div class="row">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter Your Full Nme"/>
+            <div id="errName" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" placeholder="Enter Your Email" />
+            <div id="errEmail" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="phone">Mobile phone</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter Your Phone Number" />
+            <div id="errphone" class="err"></div>
+        </div>
+        <div>
+            <div class="row">
+                <label for="billingdate">Billing Date</label>
+                <input type="date" id="billingdate" name="billingdate"placeholder="Enter Billing Date" />
+                <div id="errbillingdate" class ="err"></div>
+        </div>
+        <div>
+            <div class="row">
+                <label for="billingamount">Billing Amount</label>
+                <input type="number" id="billingamount" name="billingamount" placeholder="Enter Billing amount"/>
+                <div id="errbillingamount" class ="err"></div>
+       
+        <button>Register</button>
+    </form>
+</body>
+</html>
